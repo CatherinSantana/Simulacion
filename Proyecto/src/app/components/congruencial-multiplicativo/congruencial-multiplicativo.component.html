@@ -1,0 +1,93 @@
+<div class="container">
+  <h1 class="text-center">Método congruencial multiplicativo</h1>
+  <div class="container">
+    <div class="d-flex justify-content-center align-items-center">
+
+    <form class="col-10 mt-5" #congruencialMultiplicativoForm="ngForm"
+      (ngSubmit)="congruencialMultiplicativo(congruencialMultiplicativoForm)">
+      <div class="row">
+        <div class="col">
+          <div class="mb-3">
+            <label class="form-label">Modulo (m):</label>
+            <input type="number" class="form-control" placeholder=" 4" name="modulo" #modulo="ngModel"
+              [(ngModel)]="congruencialMultiplicativoModel.m" [ngModelOptions]="{ standalone: true }" required />
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-3">
+            <label class="form-label">Semilla (X0):</label>
+            <input type="number" class="form-control" placeholder=" 2" name="semilla" #semilla="ngModel"
+              [(ngModel)]="congruencialMultiplicativoModel.x0" [ngModelOptions]="{ standalone: true }" required />
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-3">
+            <label class="form-label">Multiplicador (a):</label>
+            <input type="number" class="form-control" placeholder=" 3" name="multiplicador" #multiplicador="ngModel"
+              [(ngModel)]="congruencialMultiplicativoModel.a" [ngModelOptions]="{ standalone: true }" required />
+          </div>
+        </div>
+        <div class="col">
+
+          <div class="mb-3">
+            <label class="form-label">Interacciones (n):</label>
+            <input type="number" class="form-control" placeholder=" 10" name="interacciones" #interacciones="ngModel"
+              [(ngModel)]="congruencialMultiplicativoModel.n" [ngModelOptions]="{ standalone: true }" required />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button type="submit" class="btn btn-danger col-3" [disabled]="congruencialMultiplicativoForm.invalid">
+            Calcular
+          </button>
+          
+          <button type="button" class="btn btn-info ml-2 col-3" (click)="generarGrafico()" *ngIf="grafico">
+            Generar gráfico
+          </button>
+        </div>
+      </div>
+    </form>
+    </div>
+    <div class="col-6 m-auto text-center " *ngIf="grafico" >
+
+<div class="container mt-5" style="overflow-y: auto; overflow-x: hidden; max-height: 400px;">
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <thead class="bg-info">
+          <tr>
+            <th scope="col">XN</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="xn">
+          <tr *ngFor="let result of xn">
+            <td>{{ result }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col">
+      <table class="table">
+        <thead class="bg-info">
+          <tr>
+            <th scope="col">ri</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="ri">
+          <tr *ngFor="let result of ri">
+            <td>{{ result }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+<br><br>
+
+<div class="d-flex justify-content-center align-items-center">
+
+  <img *ngIf="mostrar" src="{{url+'grafico/'+ri}}" width="600px" />
+
+</div>
